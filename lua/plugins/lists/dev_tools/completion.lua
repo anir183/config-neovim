@@ -22,7 +22,6 @@ return {
 			{ "https://codeberg.org/FelipeLema/cmp-async-path", name = "cmp_async_path" },
 			-- { "hrsh7th/cmp-path", name = "cmp_path" },
 			{ "hrsh7th/cmp-cmdline",                            name = "cmp_cmdline" },
-			{ "hrsh7th/cmp-nvim-lsp-signature-help",            name = "cmp_lsp_signature" },
 			{ "hrsh7th/cmp-calc",                               name = "cmp_calc" },
 			{ "JMarkin/cmp-diag-codes",                         name = "cmp_diag_codes" },
 			{ "hrsh7th/cmp-nvim-lsp-document-symbol",           name = "cmp_document_symbol" },
@@ -71,7 +70,6 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 				}, {
-					{ name = "nvim_lsp_signature_help" },
 					{ name = "calc" },
 					{ name = "diag-codes",             option = { in_comment = true } },
 					{ name = "async_path" },
@@ -165,4 +163,26 @@ return {
 			MAP({ "i", "s", "n" }, "<C-b>", function() if not cmp.scroll_docs(-1) then feedkeys("<C-b>") end end,
 				{ desc = "plugins/cmp: scroll up completion element docs or just do <C-B>" })
 		end
-	} }
+	},
+
+	{
+		"ray-x/lsp_signature.nvim",
+		name = "lsp_signature",
+		config = function()
+			require("lsp_signature").setup({
+				floating_window = false,
+				hint_prefix = {
+					above = "🡯 ",
+					current = "🡨 ",
+					below = "🡬 "
+				}
+			});
+
+			MAP(
+				{ "i", "s", "n" }, "<C-h>",
+				require("lsp_signature").toggle_float_win,
+				{ desc = "plugins/lsp_signature: toggle floating signature window" }
+			);
+		end
+	}
+};
