@@ -81,6 +81,8 @@ return {
 				zen = { enabled = true }
 			});
 
+			vim.opt.list = false;
+
 			vim.api.nvim_create_autocmd("User", {
 				group = AUGRP,
 				pattern = "OilActionsPost",
@@ -136,7 +138,7 @@ return {
 			NMAP("<leader>sm", function() Snacks.picker.marks() end, { desc = "plugins/snacks: marks" });
 			NMAP("<leader>sq", function() Snacks.picker.qflist() end, { desc = "plugins/snacks: quickfix list" });
 
-			-- -- LSP
+			-- LSP
 			NMAP("gd", function() Snacks.picker.lsp_definitions() end, { desc = "plugins/snacks: goto definition" });
 			NMAP("gD", function() Snacks.picker.lsp_declarations() end, { desc = "plugins/snacks: goto declaration" });
 			NMAP("gr", function() Snacks.picker.lsp_references() end, { desc = "plugins/snacks: references", nowait = true });
@@ -145,7 +147,7 @@ return {
 			NMAP("<leader>ls", function() Snacks.picker.lsp_symbols() end, { desc = "plugins/snacks: lsp symbols" });
 			NMAP("<leader>lS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "plugins/snacks: lsp workspace symbols" });
 
-			-- -- Other
+			-- Other
 			NMAP("<leader>z",  function() Snacks.zen() end, { desc = "plugins/snacks: toggle zen mode" });
 			NMAP("<leader>Z",  function() Snacks.zen.zoom() end, { desc = "plugins/snacks: toggle zoom" });
 			NMAP("<leader>.",  function() Snacks.scratch() end, { desc = "plugins/snacks: toggle scratch buffer" });
@@ -154,7 +156,7 @@ return {
 			NMAP("<leader>bd", function() Snacks.bufdelete() end, { desc = "plugins/snacks: delete buffer" });
 			NMAP("<leader>cR", function() Snacks.rename.rename_file() end, { desc = "plugins/snacks: rename file" });
 			MAP({ "n", "v" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "plugins/snacks: git browse" });
-			NMAP("<leader>gg", function() Snacks.lazygit() end, { desc = "plugins/snacks: lazygit" });
+			NMAP("<leader>lg", function() Snacks.lazygit() end, { desc = "plugins/snacks: lazygit" });
 			NMAP("<leader>un", function() Snacks.notifier.hide() end, { desc = "plugins/snacks: dismiss all notifications" });
 			NMAP("<c-/>",      function() Snacks.terminal() end, { desc = "plugins/snacks: toggle terminal" });
 			MAP({ "n", "t" }, "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "plugins/snacks: next reference" });
