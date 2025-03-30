@@ -20,12 +20,22 @@ STSLN_COMP = {
 	end,
 
 	position = function()
-		return ("%%#%s#%s%%*"):format("Substitute", " %l:%-c ~ %2p%% ");
+		return ("%%#%s#%s%%*"):format("CursorLine", " %l:%-c ~ %2p%% ");
 	end,
 
 	mode = function()
 		local mode = mode_strings[vim.fn.mode()];
 		return ("%%#%s#%s%%*"):format("IncSearch", mode);
+	end,
+
+	indent = function()
+		---@diagnostic disable-next-line: undefined-field
+		local mode = vim.opt.expandtab._value and "spaces" or "tabs";
+
+		---@diagnostic disable-next-line: undefined-field
+		local len = vim.opt.tabstop._value;
+
+		return ("%%#%s#%s%%*"):format("CursorLineNr", ("[" .. mode .. " : " .. len .. "] "));
 	end,
 
 	warnings = function()
@@ -49,5 +59,6 @@ vim.opt.statusline = table.concat({
 	"%{%v:lua.STSLN_COMP.errors()%}",
 	"%r", "%w", "%h", "%m", "%=",
 	"%{%v:lua.STSLN_COMP.filename()%}",
+	"%{%v:lua.STSLN_COMP.indent()%}",
 	"%{%v:lua.STSLN_COMP.position()%}"
 }, "");

@@ -2,6 +2,15 @@
 
 return {
 
+	-- auto calculate indentation (useful for non-personal projects)
+	{
+		"nmac427/guess-indent.nvim",
+		name = "guess_indent",
+		config = function()
+			require("guess-indent").setup();
+		end
+	},
+
 	-- pretty good file explorer
 	{
 		"stevearc/oil.nvim",
