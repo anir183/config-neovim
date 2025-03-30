@@ -33,6 +33,15 @@ return {
 		end
 	},
 
+	-- lsp progress messages
+	{
+		"j-hui/fidget.nvim",
+		name = "fidget",
+		config = function()
+			require("fidget").setup();
+		end
+	},
+
 	-- hide sensitive tokens, just in case
 	{
 		"laytan/cloak.nvim",
