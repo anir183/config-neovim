@@ -42,7 +42,6 @@ opt.showmode = false;                                                           
 opt.scrolloff = 8;
 opt.ruler = false;
 opt.list = true;
-opt.listchars = {};
 local listchars = {
 	{ lead = "∙" },
 	-- vim.opt.tabstop returns a table instead of the required value
