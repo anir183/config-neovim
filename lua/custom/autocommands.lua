@@ -56,12 +56,15 @@ new_aucmd({ "WinLeave", "FocusLost" }, {
 })
 
 -- set the leadmultispace value correctly on file load or focus
-new_aucmd({ "WinEnter", "BufEnter" }, {
+new_aucmd({ "BufWinEnter" }, {
 	group = AUGRP,
 	callback = function()
-		vim.opt.listchars:append({ leadmultispace = "▎" .. ("∙"):rep(vim.opt_local.tabstop._value - 1) });
-	end
-});
+		vim.opt_local.listchars:append({
+			leadmultispace = "▎"
+				.. ("∙"):rep(vim.opt_local.tabstop._value - 1),
+		})
+	end,
+})
 
 -- anything the user wants to execute when the config is ready
 new_aucmd("VimEnter", {
