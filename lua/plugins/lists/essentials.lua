@@ -25,70 +25,42 @@ return {
 				harpoon:list():add()
 			end, { desc = "plugins/harpoon: add open file to harpoon list" })
 
-			NMAP(
-				"<leader>1",
-				function()
-					harpoon:list():select(1)
-				end,
-				{
-					desc = "plugins/harpoon: go to the first file in harpoon list",
-				}
-			)
-			NMAP(
-				"<leader>2",
-				function()
-					harpoon:list():select(2)
-				end,
-				{
-					desc = "plugins/harpoon: go to the second file in harpoon list",
-				}
-			)
-			NMAP(
-				"<leader>3",
-				function()
-					harpoon:list():select(3)
-				end,
-				{
-					desc = "plugins/harpoon: go to the third file in harpoon list",
-				}
-			)
-			NMAP(
-				"<leader>4",
-				function()
-					harpoon:list():select(4)
-				end,
-				{
-					desc = "plugins/harpoon: go to the fourth file in harpoon list",
-				}
-			)
-			NMAP(
-				"<leader>5",
-				function()
-					harpoon:list():select(5)
-				end,
-				{
-					desc = "plugins/harpoon: go to the fifth file in harpoon list",
-				}
-			)
+			NMAP("<leader>1", function()
+				harpoon:list():select(1)
+			end, {
+				desc = "plugins/harpoon: go to the first file in harpoon list",
+			})
+			NMAP("<leader>2", function()
+				harpoon:list():select(2)
+			end, {
+				desc = "plugins/harpoon: go to the second file in harpoon list",
+			})
+			NMAP("<leader>3", function()
+				harpoon:list():select(3)
+			end, {
+				desc = "plugins/harpoon: go to the third file in harpoon list",
+			})
+			NMAP("<leader>4", function()
+				harpoon:list():select(4)
+			end, {
+				desc = "plugins/harpoon: go to the fourth file in harpoon list",
+			})
+			NMAP("<leader>5", function()
+				harpoon:list():select(5)
+			end, {
+				desc = "plugins/harpoon: go to the fifth file in harpoon list",
+			})
 
-			NMAP(
-				"]h",
-				function()
-					harpoon:list():next()
-				end,
-				{
-					desc = "plugins/harpoon: go to the next file in harpoon list",
-				}
-			)
-			NMAP(
-				"[h",
-				function()
-					harpoon:list():prev()
-				end,
-				{
-					desc = "plugins/harpoon: go to the previous file in harpoon list",
-				}
-			)
+			NMAP("]h", function()
+				harpoon:list():next()
+			end, {
+				desc = "plugins/harpoon: go to the next file in harpoon list",
+			})
+			NMAP("[h", function()
+				harpoon:list():prev()
+			end, {
+				desc = "plugins/harpoon: go to the previous file in harpoon list",
+			})
 		end,
 	},
 
@@ -97,21 +69,19 @@ return {
 		"folke/snacks.nvim",
 		name = "snacks",
 		priority = 1000, -- some plugins may depend on snacks
+		init = function()
+			vim.g.snacks_animate = false
+		end,
 		config = function()
 			require("snacks").setup({
 				bigfile = { enabled = true },
 				input = { enabled = true },
-				indent = { enabled = false },
 				lazygit = { enabled = true },
 				picker = { enabled = true },
 				notifier = { enabled = true },
-				dim = { enabled = true },
-				notify = { enabled = true },
 				rename = { enabled = true },
 				quickfile = { enabled = true },
 				scope = { enabled = true },
-				words = { enabled = true },
-				zen = { enabled = true },
 			})
 
 			vim.api.nvim_create_autocmd("User", {
@@ -130,21 +100,12 @@ return {
 			NMAP("<leader><space>", function()
 				Snacks.picker.smart()
 			end, { desc = "plugins/snacks: smart find files" })
-			NMAP("<leader>,", function()
-				Snacks.picker.buffers()
-			end, { desc = "plugins/snacks: buffers" })
-			NMAP("<leader>/", function()
-				Snacks.picker.grep()
-			end, { desc = "plugins/snacks: grep" })
 			NMAP("<leader>:", function()
 				Snacks.picker.command_history()
 			end, { desc = "plugins/snacks: command history" })
 			NMAP("<leader>n", function()
 				Snacks.picker.notifications()
 			end, { desc = "plugins/snacks: notification history" })
-			NMAP("<leader>e", function()
-				Snacks.explorer()
-			end, { desc = "plugins/snacks: file explorer" })
 
 			-- Find
 			---@diagnostic disable-next-line: assign-type-mismatch
@@ -154,6 +115,16 @@ return {
 			NMAP("<leader>ff", function()
 				Snacks.picker.files()
 			end, { desc = "plugins/snacks: find files" })
+			NMAP("<leader>fF", function()
+				Snacks.picker.files({ hidden = true })
+			end, { desc = "plugins/snacks: find files incl hidden" })
+			NMAP(
+				"<leader>FF",
+				function()
+					Snacks.picker.files({ hidden = true, ignored = true })
+				end,
+				{ desc = "plugins/snacks: find files incl hidden and ignored" }
+			)
 			NMAP("<leader>fg", function()
 				Snacks.picker.git_files()
 			end, { desc = "plugins/snacks: find git files" })
@@ -165,24 +136,12 @@ return {
 			end, { desc = "plugins/snacks: recent" })
 
 			-- Git
-			NMAP("<leader>gb", function()
-				Snacks.picker.git_branches()
-			end, { desc = "plugins/snacks: git branches" })
 			NMAP("<leader>gl", function()
 				Snacks.picker.git_log()
 			end, { desc = "plugins/snacks: git log" })
 			NMAP("<leader>gL", function()
 				Snacks.picker.git_log_line()
 			end, { desc = "plugins/snacks: git log line" })
-			NMAP("<leader>gs", function()
-				Snacks.picker.git_status()
-			end, { desc = "plugins/snacks: git status" })
-			NMAP("<leader>gS", function()
-				Snacks.picker.git_stash()
-			end, { desc = "plugins/snacks: git stash" })
-			NMAP("<leader>gd", function()
-				Snacks.picker.git_diff()
-			end, { desc = "plugins/snacks: git diff (hunks)" })
 			NMAP("<leader>gf", function()
 				Snacks.picker.git_log_file()
 			end, { desc = "plugins/snacks: git log file" })
@@ -197,11 +156,11 @@ return {
 			NMAP("<leader>sg", function()
 				Snacks.picker.grep()
 			end, { desc = "plugins/snacks: grep" })
-			MAP({ "n", "x" }, "<leader>sw", function()
-				Snacks.picker.grep_word()
-			end, { desc = "plugins/snacks: visual selection or word" })
 
 			-- Search
+			NMAP("<leader>s,", function()
+				Snacks.picker.buffers()
+			end, { desc = "plugins/snacks: buffers" })
 			NMAP("<leader>s\"", function()
 				Snacks.picker.registers()
 			end, { desc = "plugins/snacks: registers" })
@@ -211,7 +170,7 @@ return {
 			NMAP("<leader>sb", function()
 				Snacks.picker.lines()
 			end, { desc = "plugins/snacks: buffer lines" })
-			NMAP("<leader>sC", function()
+			NMAP("<leader>sc", function()
 				Snacks.picker.commands()
 			end, { desc = "plugins/snacks: commands" })
 			NMAP("<leader>sd", function()
@@ -266,12 +225,9 @@ return {
 			end, { desc = "plugins/snacks: lsp workspace symbols" })
 
 			-- Other
-			NMAP("<leader>z", function()
-				Snacks.zen()
-			end, { desc = "plugins/snacks: toggle zen mode" })
-			NMAP("<leader>Z", function()
+			NMAP("<leader>zm", function()
 				Snacks.zen.zoom()
-			end, { desc = "plugins/snacks: toggle zoom" })
+			end, { desc = "plugins/snacks: toggle zen mode zoomed in" })
 			NMAP("<leader>.", function()
 				Snacks.scratch()
 			end, { desc = "plugins/snacks: toggle scratch buffer" })
@@ -296,15 +252,9 @@ return {
 			NMAP("<leader>un", function()
 				Snacks.notifier.hide()
 			end, { desc = "plugins/snacks: dismiss all notifications" })
-			NMAP("<c-/>", function()
+			NMAP("<leader>tm", function()
 				Snacks.terminal()
 			end, { desc = "plugins/snacks: toggle terminal" })
-			MAP({ "n", "t" }, "]]", function()
-				Snacks.words.jump(vim.v.count1)
-			end, { desc = "plugins/snacks: next reference" })
-			MAP({ "n", "t" }, "[[", function()
-				Snacks.words.jump(-vim.v.count1)
-			end, { desc = "plugins/snacks: prev reference" })
 		end,
 	},
 
