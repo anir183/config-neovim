@@ -237,9 +237,6 @@ return {
 			NMAP("<leader>n", function()
 				Snacks.notifier.show_history()
 			end, { desc = "plugins/snacks: notification history" })
-			NMAP("<leader>bd", function()
-				Snacks.bufdelete()
-			end, { desc = "plugins/snacks: delete buffer" })
 			NMAP("<leader>cR", function()
 				Snacks.rename.rename_file()
 			end, { desc = "plugins/snacks: rename file" })
@@ -252,9 +249,6 @@ return {
 			NMAP("<leader>un", function()
 				Snacks.notifier.hide()
 			end, { desc = "plugins/snacks: dismiss all notifications" })
-			NMAP("<leader>tm", function()
-				Snacks.terminal()
-			end, { desc = "plugins/snacks: toggle terminal" })
 		end,
 	},
 
