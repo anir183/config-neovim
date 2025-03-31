@@ -9,13 +9,17 @@ return {
 		config = function()
 			local ensure_installed_daps = {}
 			local handlers = {
-				function(config) require("mason-nvim-dap").default_setup(config) end,
+				function(config)
+					require("mason-nvim-dap").default_setup(config)
+				end,
 			}
 
 			for dap_name, handler in pairs(OPTS.daps) do
 				table.insert(ensure_installed_daps, dap_name)
 
-				if handler then handlers[dap_name] = handler end
+				if handler then
+					handlers[dap_name] = handler
+				end
 			end
 
 			require("mason-nvim-dap").setup({
@@ -41,7 +45,7 @@ return {
 					end
 				end
 			end, 10)
-		end
+		end,
 	},
 
 	-- debug adapter
@@ -52,36 +56,46 @@ return {
 		config = function()
 			local dap = require("dap")
 
-			NMAP("<F1>", dap.toggle_breakpoint, { desc = "plugins/dap: toggle breakpoint" });
 			NMAP(
-				"<F2>",
-				function() dap.set_breakpoint(vim.fn.input("Breakpoint Condition: ")); end,
-				{ desc = "plugins/dap: set a conditional breakpoint" }
-			);
-			NMAP(
-				"<F3>",
-				function() dap.set_breakpoint(nil, nil, vim.fn.input("Log Point Message: ")); end,
-				{ desc = "plugins/dap: set a breakpoint with a log message" }
-			);
+				"<F1>",
+				dap.toggle_breakpoint,
+				{ desc = "plugins/dap: toggle breakpoint" }
+			)
+			NMAP("<F2>", function()
+				dap.set_breakpoint(vim.fn.input("Breakpoint Condition: "))
+			end, { desc = "plugins/dap: set a conditional breakpoint" })
+			NMAP("<F3>", function()
+				dap.set_breakpoint(
+					nil,
+					nil,
+					vim.fn.input("Log Point Message: ")
+				)
+			end, {
+				desc = "plugins/dap: set a breakpoint with a log message",
+			})
 			NMAP(
 				"<F4>",
 				dap.run_to_cursor,
-				{ desc = "plugins/dap: run till the line containing the cursor" }
-			);
+				{
+					desc = "plugins/dap: run till the line containing the cursor",
+				}
+			)
 
 			NMAP(
 				"<F5>",
-				function() require("dap.ui").eval(nil, { enter = true }); end,
+				function()
+					require("dap.ui").eval(nil, { enter = true })
+				end,
 				{ desc = "plugins/dap: evaluate the variable under the cursor" }
-			);
+			)
 
-			NMAP("<leader>dr", dap.restart, { desc = "plugins/dap: restart" });
-			NMAP("<F6>", dap.continue, { desc = "plugins/dap: continue" });
-			NMAP("<F7>", dap.step_into, { desc = "plugins/dap: step into" });
-			NMAP("<F8>", dap.step_over, { desc = "plugins/dap: step over" });
-			NMAP("<F9>", dap.step_out, { desc = "plugins/dap: step out" });
-			NMAP("<F10>", dap.step_back, { desc = "plugins/dap: step back" });
-		end
+			NMAP("<leader>dr", dap.restart, { desc = "plugins/dap: restart" })
+			NMAP("<F6>", dap.continue, { desc = "plugins/dap: continue" })
+			NMAP("<F7>", dap.step_into, { desc = "plugins/dap: step into" })
+			NMAP("<F8>", dap.step_over, { desc = "plugins/dap: step over" })
+			NMAP("<F9>", dap.step_out, { desc = "plugins/dap: step out" })
+			NMAP("<F10>", dap.step_back, { desc = "plugins/dap: step back" })
+		end,
 	},
 
 	-- ui for dap
@@ -99,8 +113,8 @@ return {
 			},
 		},
 		config = function()
-			local dap = require("dap");
-			local dapui = require("dapui");
+			local dap = require("dap")
+			local dapui = require("dapui")
 
 			dapui.setup()
 
@@ -109,38 +123,50 @@ return {
 			require("nvim-dap-virtual-text").setup({
 				-- hides and sensitive tokens... just in case
 				display_callback = function(variable)
-					print('wtf');
-					local name = string.lower(variable.name);
-					local value = string.lower(variable.value);
+					print("wtf")
+					local name = string.lower(variable.name)
+					local value = string.lower(variable.value)
 
-					if (
+					if
 						name:match("secret")
 						or name:match("api")
 						or value:match("secret")
 						or value:match("api")
-					) then
+					then
 						return " ******"
 					end
 
-					if (#variable.value > 15) then
-						return " " .. string.sub(variable.value, 1, 15) .. "... ";
+					if #variable.value > 15 then
+						return " "
+							.. string.sub(variable.value, 1, 15)
+							.. "... "
 					end
 
-					return " " .. variable.value;
+					return " " .. variable.value
 				end,
 			})
 
-			dap.listeners.before.attach.dapui_config = function() dapui.open(); end
-			dap.listeners.before.launch.dapui_config = function() dapui.open(); end
-			dap.listeners.before.event_terminated.dapui_config = function() dapui.open(); end
-			dap.listeners.before.event_exited.dapui_config = function() dapui.open(); end
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.open()
+			end
 
-			NMAP("<leader>dt", dapui.toggle, { desc = "plugins/dapui: toggle the dap ui" });
 			NMAP(
-				"<leader>dr",
-				function() dapui.open({ reset = true }); end,
-				{ desc = "plugins/dapui: reset the dap ui" }
-			);
-		end
-	}
+				"<leader>dt",
+				dapui.toggle,
+				{ desc = "plugins/dapui: toggle the dap ui" }
+			)
+			NMAP("<leader>dr", function()
+				dapui.open({ reset = true })
+			end, { desc = "plugins/dapui: reset the dap ui" })
+		end,
+	},
 }

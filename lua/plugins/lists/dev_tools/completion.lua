@@ -6,9 +6,8 @@ return {
 		"L3MON4D3/LuaSnip",
 		name = "luasnip",
 		dependencies = { "lspconfig" },
-		config = function() end
+		config = function() end,
 	},
-
 
 	-- code completion engine
 	{
@@ -16,15 +15,38 @@ return {
 		name = "cmp",
 		dependencies = {
 			-- sources
-			"lazydev", "cmp_lsp", "luasnip",
-			{ "saadparwaiz1/cmp_luasnip",                       name = "cmp_luasnip" },
-			{ "hrsh7th/cmp-buffer",                             name = "cmp_buffer" },
-			{ "https://codeberg.org/FelipeLema/cmp-async-path", name = "cmp_async_path" },
+			"lazydev",
+			"cmp_lsp",
+			"luasnip",
+			{
+				"saadparwaiz1/cmp_luasnip",
+				name = "cmp_luasnip",
+			},
+			{
+				"hrsh7th/cmp-buffer",
+				name = "cmp_buffer",
+			},
+			{
+				"https://codeberg.org/FelipeLema/cmp-async-path",
+				name = "cmp_async_path",
+			},
 			-- { "hrsh7th/cmp-path", name = "cmp_path" },
-			{ "hrsh7th/cmp-cmdline",                            name = "cmp_cmdline" },
-			{ "hrsh7th/cmp-calc",                               name = "cmp_calc" },
-			{ "JMarkin/cmp-diag-codes",                         name = "cmp_diag_codes" },
-			{ "hrsh7th/cmp-nvim-lsp-document-symbol",           name = "cmp_document_symbol" },
+			{
+				"hrsh7th/cmp-cmdline",
+				name = "cmp_cmdline",
+			},
+			{
+				"hrsh7th/cmp-calc",
+				name = "cmp_calc",
+			},
+			{
+				"JMarkin/cmp-diag-codes",
+				name = "cmp_diag_codes",
+			},
+			{
+				"hrsh7th/cmp-nvim-lsp-document-symbol",
+				name = "cmp_document_symbol",
+			},
 
 			-- customisation
 			"devicons",
@@ -62,7 +84,9 @@ return {
 				},
 				view = { docs = { auto_open = false } },
 				snippet = {
-					expand = function(args) require("luasnip").lsp_expand(args.body) end,
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body)
+					end,
 				},
 				sources = cmp.config.sources({
 					{ name = "lazydev" },
@@ -71,7 +95,10 @@ return {
 					{ name = "luasnip" },
 				}, {
 					{ name = "calc" },
-					{ name = "diag-codes",             option = { in_comment = true } },
+					{
+						name = "diag-codes",
+						option = { in_comment = true },
+					},
 					{ name = "async_path" },
 				}, {
 					{ name = "buffer" },
@@ -102,10 +129,14 @@ return {
 				matching = { disallow_symbol_nonprefix_matching = false },
 			})
 
-
 			local feedkeys = function(keys)
 				vim.api.nvim_feedkeys(
-					vim.api.nvim_replace_termcodes(vim.keycode(keys), true, true, true),
+					vim.api.nvim_replace_termcodes(
+						vim.keycode(keys),
+						true,
+						true,
+						true
+					),
 					"ni",
 					false
 				)
@@ -141,14 +172,23 @@ return {
 			end, {
 				desc = "plugins/cmp: select previous completion suggestion or snippet or just do S-TAB",
 			})
-			MAP({ "i", "s" }, "<CR>", function()
-				if not cmp.visible() and not cmp.get_active_entry() then
-					feedkeys("<CR>")
-					return
-				end
+			MAP(
+				{ "i", "s" },
+				"<CR>",
+				function()
+					if not cmp.visible() and not cmp.get_active_entry() then
+						feedkeys("<CR>")
+						return
+					end
 
-				if not cmp.confirm({ select = false }) then feedkeys("<CR>") end
-			end, { desc = "plugins/cmp: pick selected completion suggestion or just do ENTER" })
+					if not cmp.confirm({ select = false }) then
+						feedkeys("<CR>")
+					end
+				end,
+				{
+					desc = "plugins/cmp: pick selected completion suggestion or just do ENTER",
+				}
+			)
 
 			MAP({ "i", "s" }, "<C-k>", function()
 				if cmp.visible_docs() then
@@ -157,12 +197,31 @@ return {
 					cmp.open_docs()
 				end
 			end, { desc = "plugins/cmp: togglw completion doc window" })
-			MAP({ "i", "s", "n" }, "<C-f>", function()
-				if not cmp.scroll_docs(1) then feedkeys("<C-f>") end
-			end, { desc = "plugins/cmp: scroll down completion element docs or just do <C-F>" })
-			MAP({ "i", "s", "n" }, "<C-b>", function() if not cmp.scroll_docs(-1) then feedkeys("<C-b>") end end,
-				{ desc = "plugins/cmp: scroll up completion element docs or just do <C-B>" })
-		end
+			MAP(
+				{ "i", "s", "n" },
+				"<C-f>",
+				function()
+					if not cmp.scroll_docs(1) then
+						feedkeys("<C-f>")
+					end
+				end,
+				{
+					desc = "plugins/cmp: scroll down completion element docs or just do <C-F>",
+				}
+			)
+			MAP(
+				{ "i", "s", "n" },
+				"<C-b>",
+				function()
+					if not cmp.scroll_docs(-1) then
+						feedkeys("<C-b>")
+					end
+				end,
+				{
+					desc = "plugins/cmp: scroll up completion element docs or just do <C-B>",
+				}
+			)
+		end,
 	},
 
 	{
@@ -174,15 +233,18 @@ return {
 				hint_prefix = {
 					above = "🡯 ",
 					current = "🡨 ",
-					below = "🡬 "
-				}
-			});
+					below = "🡬 ",
+				},
+			})
 
 			MAP(
-				{ "i", "s", "n" }, "<C-h>",
+				{ "i", "s", "n" },
+				"<C-h>",
 				require("lsp_signature").toggle_float_win,
-				{ desc = "plugins/lsp_signature: toggle floating signature window" }
-			);
-		end
-	}
-};
+				{
+					desc = "plugins/lsp_signature: toggle floating signature window",
+				}
+			)
+		end,
+	},
+}

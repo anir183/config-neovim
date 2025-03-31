@@ -5,15 +5,17 @@ vim.g.netrw_winsize = 17 -- netrw windows size when not in fullscreen (ie sideba
 -- netrw toggling
 local is_netrw_sidebar_open = false
 local toggle_netrw_sidebar = function()
-	if vim.bo.filetype == "netrw" and not is_netrw_sidebar_open then return end
+	if vim.bo.filetype == "netrw" and not is_netrw_sidebar_open then
+		return
+	end
 
 	if not is_netrw_sidebar_open then
-		vim.g.netrw_banner = 0;
-		vim.cmd("Lexplore %:p:h");
+		vim.g.netrw_banner = 0
+		vim.cmd("Lexplore %:p:h")
 	else
 		vim.cmd("Lexplore")
-		vim.g.netrw_banner = 1;
-		vim.g.netrw_chgwin = -1;                                                                                      -- using lexplore changes this value which needs to be reset to prevent weird behaviour
+		vim.g.netrw_banner = 1
+		vim.g.netrw_chgwin = -1 -- using lexplore changes this value which needs to be reset to prevent weird behaviour
 	end
 
 	is_netrw_sidebar_open = not is_netrw_sidebar_open
@@ -34,9 +36,25 @@ local toggle_netrw_fullscreen = function()
 end
 
 -- creating command
-vim.api.nvim_create_user_command("Sbex", toggle_netrw_sidebar, { desc = "toggle netrw sidebar" })
-vim.api.nvim_create_user_command("Ex", toggle_netrw_fullscreen, { desc = "toggle netrw fullscreen" })
+vim.api.nvim_create_user_command(
+	"Sbex",
+	toggle_netrw_sidebar,
+	{ desc = "toggle netrw sidebar" }
+)
+vim.api.nvim_create_user_command(
+	"Ex",
+	toggle_netrw_fullscreen,
+	{ desc = "toggle netrw fullscreen" }
+)
 
 -- creating keymaps
-NMAP("<leader>e", toggle_netrw_sidebar, { desc = "core/custom: toggle netrw sidebar" })
-NMAP("<leader>E", toggle_netrw_fullscreen, { desc = "core/custom: toggle netrw fullscreen" })
+NMAP(
+	"<leader>e",
+	toggle_netrw_sidebar,
+	{ desc = "core/custom: toggle netrw sidebar" }
+)
+NMAP(
+	"<leader>E",
+	toggle_netrw_fullscreen,
+	{ desc = "core/custom: toggle netrw fullscreen" }
+)

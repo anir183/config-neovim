@@ -21,7 +21,7 @@ return {
 		-- add new filetype corrsponding to pattern
 		pattern = {
 			-- ["regex_pattern"] = "filetype",
-		}
+		},
 	},
 	after = function()
 		-- anything here gets executed on VimEnter after the config has been definitely loaded
@@ -36,7 +36,7 @@ return {
 				files = { "src/parser.c", "src/scanner.c" },
 			},
 			filetype = "dotenv",
-		}
+		},
 	},
 	lsps = {
 		-- list of lsp names can be found in mason via the :Mason command
@@ -103,10 +103,9 @@ return {
 	},
 	cloak_patterns = {
 		{
-			file_pattern = { "*.env", ".env*", },
+			file_pattern = { "*.env", ".env*" },
 			cloak_pattern = { "=.+", ":.=" },
 			replace = nil,
 		},
 	},
-};
-
+}

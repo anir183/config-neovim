@@ -13,11 +13,8 @@ return {
 			format_on_save = { lsp_format = "never", timeout_ms = 500 },
 		})
 
-		MAP(
-			{ "n", "v" },
-			"<leader>fm",
-			function() conform.format({ lsp_format = "fallback", timeout_ms = 500 }) end,
-			{ desc = "plugins/conform: format the file or selection" }
-		)
+		MAP({ "n", "v" }, "<leader>fm", function()
+			conform.format({ lsp_format = "fallback", timeout_ms = 500 })
+		end, { desc = "plugins/conform: format the file or selection" })
 	end,
 }

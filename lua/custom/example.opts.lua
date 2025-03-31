@@ -15,17 +15,17 @@ return {
 			config = function()
 				require("flutter-tools").setup({
 					debugger = { enabled = true },
-				});
-			end
+				})
+			end,
 		},
 		{
 			"pmizio/typescript-tools.nvim",
 			name = "typescript_tools",
 			dependencies = { "plenary", "lspconfig" },
 			config = function()
-				require("typescript-tools").setup({});
-			end
-		}
+				require("typescript-tools").setup({})
+			end,
+		},
 	},
 	after = function()
 		-- anything here gets executed on VimEnter after the config has been definitely loaded
@@ -99,9 +99,15 @@ return {
 	},
 	cloak_patterns = {
 		{
-			file_pattern = { "*.env", ".env*", "secret*.json", "*secret.json", "*secret*.json" },
+			file_pattern = {
+				"*.env",
+				".env*",
+				"secret*.json",
+				"*secret.json",
+				"*secret*.json",
+			},
 			cloak_pattern = { "=.+", ":.=" },
 			replace = nil,
 		},
 	},
-};
+}

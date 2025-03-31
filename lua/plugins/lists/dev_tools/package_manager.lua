@@ -8,7 +8,11 @@ return {
 		config = function()
 			require("mason").setup()
 
-			NMAP("<leader>mn", vim.cmd.Mason, { desc = "plugins/mason: open mason" })
+			NMAP(
+				"<leader>mn",
+				vim.cmd.Mason,
+				{ desc = "plugins/mason: open mason" }
+			)
 		end,
 	},
 
@@ -40,6 +44,6 @@ return {
 					["mason-nvim-dap"] = false,
 				},
 			})
-		end
+		end,
 	},
 }

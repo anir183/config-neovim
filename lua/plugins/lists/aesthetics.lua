@@ -10,11 +10,11 @@ return {
 				flavour = "mocha",
 				transparent_background = true, -- disables setting the background color.
 				show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
-				term_colors = true -- sets terminal colors (e.g. `g:terminal_color_0`)
+				term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
 			})
 
 			vim.cmd.colorscheme("catppuccin")
-		end
+		end,
 	},
 
 	-- icons for netrw
@@ -26,6 +26,6 @@ return {
 			-- the fields are not necessary
 			---@diagnostic disable-next-line: missing-fields
 			require("netrw").setup({ use_devicons = true })
-		end
-	}
+		end,
+	},
 }

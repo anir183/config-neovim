@@ -8,5 +8,5 @@ vim.filetype.add(vim.tbl_deep_extend("force", {
 	},
 	pattern = {
 		["%.env%.[%w_.-]+"] = "dotenv",
-	}
-}, OPTS.additional_filetypes));
+	},
+}, OPTS.additional_filetypes))

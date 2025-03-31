@@ -5,7 +5,7 @@ return {
 	{
 		"nvim-lua/plenary.nvim",
 		name = "plenary",
-		priority = 1000
+		priority = 1000,
 	},
 
 	-- icons used by other plugins
@@ -13,7 +13,9 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		name = "devicons",
 		priority = 500,
-		config = function() require("nvim-web-devicons").setup() end
+		config = function()
+			require("nvim-web-devicons").setup()
+		end,
 	},
 
 	-- async io
@@ -21,5 +23,5 @@ return {
 		"nvim-neotest/nvim-nio",
 		name = "nio",
 		priority = 500,
-	}
+	},
 }
