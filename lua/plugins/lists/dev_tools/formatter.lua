@@ -2,7 +2,7 @@
 
 -- try to format thrice before failing
 -- async failure is common for some reason
-local function format(count)
+local function format(show_no_edit, count)
 	count = count and count or 1
 
 	require("conform").format({
@@ -11,6 +11,8 @@ local function format(count)
 		if not err then
 			if did_edit then
 				vim.notify("Formatted file!")
+			elseif show_no_edit then
+				vim.notify("No formatting required!")
 			end
 		else
 			if count <= 3 then
@@ -42,7 +44,7 @@ return {
 		})
 
 		MAP({ "n", "v" }, "<leader>fm", function()
-			format()
+			format(true)
 		end, { desc = "plugins/conform: format the file or selection" })
 	end,
 }
