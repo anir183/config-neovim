@@ -2,8 +2,12 @@
 
 -- try to format thrice before failing
 -- async failure is common for some reason
-local function format(show_no_edit, count)
+local function format(from_keymap, count)
 	count = count and count or 1
+
+	if from_keymap then
+		vim.notify("Starting format!")
+	end
 
 	require("conform").format({
 		async = true,
@@ -11,12 +15,12 @@ local function format(show_no_edit, count)
 		if not err then
 			if did_edit then
 				vim.notify("Formatted file!")
-			elseif show_no_edit then
+			elseif from_keymap then
 				vim.notify("No formatting required!")
 			end
 		else
 			if count <= 3 then
-				format(count + 1)
+				format(from_keymap, count + 1)
 			else
 				vim.notify("Could not format!\n" .. err)
 			end
@@ -39,7 +43,7 @@ return {
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = AUGRP,
 			callback = function()
-				format()
+				format(false)
 			end,
 		})
 
