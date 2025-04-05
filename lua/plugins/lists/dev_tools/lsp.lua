@@ -26,7 +26,7 @@ return {
 		name = "lspconfig",
 		dependencies = {
 			"mason_lspconfig",
-			{ "hrsh7th/cmp-nvim-lsp", name = "cmp_lsp" },
+			{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp" }, -- WARN : Name is important
 		},
 		config = function()
 			local lspconfig = require("lspconfig")

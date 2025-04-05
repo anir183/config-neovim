@@ -9,36 +9,36 @@ return {
 		config = function() end,
 	},
 
-
-	-- TODO: Maybe use blink.nvim sometime
+	-- todo: maybe use blink.nvim sometime (better, simpler and faster)
 	-- https://cmp.saghen.dev/
-	-- Should be faster
+
+	-- currently using magazine.nvim (a fork of nvim-cmp)
+	-- should be faster
 
 	-- code completion engine
 	{
-		"hrsh7th/nvim-cmp",
-		name = "cmp",
+		"iguanacucumber/magazine.nvim",
+		name = "nvim-cmp", -- WARN : Naming is important or highlighting breaks
 		dependencies = {
 			-- sources
 			"lazydev",
-			"cmp_lsp",
+			"cmp-nvim-lsp",
 			"luasnip",
 			{
 				"saadparwaiz1/cmp_luasnip",
 				name = "cmp_luasnip",
 			},
 			{
-				"hrsh7th/cmp-buffer",
-				name = "cmp_buffer",
+				"iguanacucumber/mag-buffer",
+				name = "cmp-buffer", -- WARN : Name is important
 			},
 			{
 				"https://codeberg.org/FelipeLema/cmp-async-path",
-				name = "cmp_async_path",
+				name = "cmp-async-path",
 			},
-			-- { "hrsh7th/cmp-path", name = "cmp_path" },
 			{
-				"hrsh7th/cmp-cmdline",
-				name = "cmp_cmdline",
+				"iguanacucumber/mag-cmdline",
+				name = "cmp-cmdline", -- WARN : Name is important
 			},
 			{
 				"hrsh7th/cmp-calc",
@@ -177,23 +177,18 @@ return {
 			end, {
 				desc = "plugins/cmp: select previous completion suggestion or snippet or just do S-TAB",
 			})
-			MAP(
-				{ "i", "s" },
-				"<CR>",
-				function()
-					if not cmp.visible() and not cmp.get_active_entry() then
-						feedkeys("<CR>")
-						return
-					end
+			MAP({ "i", "s" }, "<CR>", function()
+				if not cmp.visible() and not cmp.get_active_entry() then
+					feedkeys("<CR>")
+					return
+				end
 
-					if not cmp.confirm({ select = false }) then
-						feedkeys("<CR>")
-					end
-				end,
-				{
-					desc = "plugins/cmp: pick selected completion suggestion or just do ENTER",
-				}
-			)
+				if not cmp.confirm({ select = false }) then
+					feedkeys("<CR>")
+				end
+			end, {
+				desc = "plugins/cmp: pick selected completion suggestion or just do ENTER",
+			})
 
 			MAP({ "i", "s" }, "<C-k>", function()
 				if cmp.visible_docs() then
@@ -202,30 +197,20 @@ return {
 					cmp.open_docs()
 				end
 			end, { desc = "plugins/cmp: togglw completion doc window" })
-			MAP(
-				{ "i", "s", "n" },
-				"<C-f>",
-				function()
-					if not cmp.scroll_docs(1) then
-						feedkeys("<C-f>")
-					end
-				end,
-				{
-					desc = "plugins/cmp: scroll down completion element docs or just do <C-F>",
-				}
-			)
-			MAP(
-				{ "i", "s", "n" },
-				"<C-b>",
-				function()
-					if not cmp.scroll_docs(-1) then
-						feedkeys("<C-b>")
-					end
-				end,
-				{
-					desc = "plugins/cmp: scroll up completion element docs or just do <C-B>",
-				}
-			)
+			MAP({ "i", "s", "n" }, "<C-f>", function()
+				if not cmp.scroll_docs(1) then
+					feedkeys("<C-f>")
+				end
+			end, {
+				desc = "plugins/cmp: scroll down completion element docs or just do <C-F>",
+			})
+			MAP({ "i", "s", "n" }, "<C-b>", function()
+				if not cmp.scroll_docs(-1) then
+					feedkeys("<C-b>")
+				end
+			end, {
+				desc = "plugins/cmp: scroll up completion element docs or just do <C-B>",
+			})
 		end,
 	},
 
