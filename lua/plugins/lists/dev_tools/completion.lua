@@ -9,6 +9,11 @@ return {
 		config = function() end,
 	},
 
+
+	-- TODO: Maybe use blink.nvim sometime
+	-- https://cmp.saghen.dev/
+	-- Should be faster
+
 	-- code completion engine
 	{
 		"hrsh7th/nvim-cmp",
