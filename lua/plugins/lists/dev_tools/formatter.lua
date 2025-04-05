@@ -10,11 +10,14 @@ return {
 		conform.setup({
 			formatters_by_ft = OPTS.formatters,
 			formatters = OPTS.custom_formatters,
-			format_on_save = { lsp_format = "never", timeout_ms = 500 },
+			format_on_save = { lsp_format = "never", timeout_ms = 5000 },
 		})
 
-		MAP({ "n", "v" }, "<leader>fm", function()
-			conform.format({ lsp_format = "fallback", timeout_ms = 500 })
-		end, { desc = "plugins/conform: format the file or selection" })
+		MAP(
+			{ "n", "v" },
+			"<leader>fm",
+			conform.format,
+			{ desc = "plugins/conform: format the file or selection" }
+		)
 	end,
 }
