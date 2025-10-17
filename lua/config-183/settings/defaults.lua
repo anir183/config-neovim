@@ -133,6 +133,7 @@ return {
 	-- toggle different configuration modules on and off
 	-- toggling a module-group turns off all modules under it
 	-- module_toggles = { } -- keeps defaults
+	-- module_toggles = false -- turn off all modules
 	module_toggles = {
 		-- base = false -- turns all base-group modules off
 		-- base = { } -- uses defaults

@@ -1,3 +1,5 @@
+--[[ init.lua: pre configurations and initialize modules ]]
+
 CONF_183 = {
 	augrp_name = {},
 	augrp = {},
@@ -39,6 +41,11 @@ CONF_183.functions.nmap = function(lhs, rhs, desc, opts)
 	vim.keymap.set("n", lhs, rhs, opts)
 end
 
+-- check if modules are enabled
+if not CONF_183.settings.module_toggles then
+	return
+end
+
 -- when opened in vscode via vscode-neovim extension
 if vim.g.vscode then
 	print("Launched in VSCode Mode")
@@ -53,6 +60,6 @@ if vim.g.MINIMAL or CONF_183.settings.minimal_mode then
 end
 
 -- normal configuration
--- require("config-183.base")
+require("config-183.base")
 -- require("config-183.custom")
 -- require("config-183.plugin")
