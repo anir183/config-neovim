@@ -49,14 +49,13 @@ end
 
 -- when opened in vscode via vscode-neovim extension
 if vim.g.vscode then
-	print("Launched in VSCode Mode")
-	-- require("config-183.vscode")
+	require("config-183.vscode")
+	return
 end
 
 -- minimal mode
 if vim.g.MINIMAL or CONF_183.settings.minimal_mode then
-	print("Launched in Minimal Mode")
-	-- require("config-183.minimal")
+	require("config-183.minimal")
 	return
 end
 

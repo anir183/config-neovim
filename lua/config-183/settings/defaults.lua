@@ -153,8 +153,7 @@ return {
 			keymaps = true,
 			options = true,
 		},
-		vscode = {
-		},
+		vscode = {},
 		plugins = {
 			aesthetics = true,
 			dependencies = true,
