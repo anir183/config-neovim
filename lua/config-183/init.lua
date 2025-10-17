@@ -1,10 +1,12 @@
 --[[ init.lua: pre configurations and initialize modules ]]
 
 CONF_183 = {
-	augrp_name = {},
-	augrp = {},
-	functions = {},
-	settings = {},
+	augrp_name = "augroup-183", -- string name for auto command group
+	augrp = {}, -- actual autocommand group
+	auto_indent = false, -- auto indent function, false to disable auto indent
+	functions = {}, -- useful functions
+	settings = {}, -- settings table
+	statusline = {}, -- statusline components and functions
 }
 
 -- load custom or if not available, default settings
@@ -15,8 +17,7 @@ CONF_183.settings = vim.tbl_deep_extend(
 		require("config-183.settings.custom") or {}
 )
 
--- auto command groups
-CONF_183.augrp_name = "augroup-183"
+-- auto command group
 CONF_183.augrp = vim.api.nvim_create_augroup(CONF_183.augrp_name, {
 	clear = true
 })
@@ -61,5 +62,5 @@ end
 
 -- normal configuration
 require("config-183.base")
--- require("config-183.custom")
+require("config-183.custom")
 -- require("config-183.plugin")

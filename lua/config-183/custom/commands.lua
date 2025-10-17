@@ -1,0 +1,181 @@
+--[[ commands.lua: making custom commands ]]
+
+-- check if this module is enabled
+if not CONF_183.settings.module_toggles.custom.commands then
+	return
+end
+
+-- shortify functions
+local cmd = function(cmd_name, ...)
+	vim.api.nvim_create_user_command(CONF_183.settings.cmd_pre .. cmd_name, ...)
+end
+local isnum = function(str)
+	return str:match("^%-?%d+$")
+end
+
+-- edit options
+cmd("EditOptions", function()
+	local ui = vim.api.nvim_list_uis()[1]
+	local width = math.floor((ui.width * 0.7) + 0.5)
+	local height = math.floor((ui.height * 0.75) + 0.5)
+
+	vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
+		relative = "editor",
+		width = width,
+		height = height,
+		col = (ui.width - width) / 2,
+		row = (ui.height - height) / 2,
+		focusable = true,
+		border = "rounded",
+	})
+
+	local opts_path = vim.fn.stdpath("config") ..
+						"/lua/config-183/settings/custom.lua"
+	local opts_file = io.open(opts_path, "r")
+
+	if opts_file == nil then
+		local def_opts_path = vim.fn.stdpath("config") ..
+						"/lua/config-183/settings/defaults.lua"
+		local def_opts_file = io.open(def_opts_path, "r")
+
+		if not def_opts_file then
+			vim.notify("Default Options file not found. Creating empty!")
+			return
+		end
+
+		local def_opts_content = def_opts_file:read("*a")
+		def_opts_file:close()
+
+		opts_file = io.open(opts_path, "w")
+		opts_file:write(def_opts_content)
+	end
+
+	opts_file:close()
+	vim.cmd("e " .. opts_path)
+
+	CONF_183.functions.nmap(
+		"q",
+		vim.cmd.wq, 
+		"[custom]: close the config popup",
+		{ buffer = true }
+	)
+end, { desc = "[custom]: edit configurations" })
+
+-- change indentation style
+cmd("ChangeIndent", function()
+	vim.ui.select(CONF_183.auto_indent and {
+		"auto",
+		"tabs",
+		"spaces",
+	} or {
+		"tabs",
+		"spaces",
+	}, {
+		prompt = "indentation type: ",
+	}, function(indent_type)
+		if indent_type == "auto" then
+			CONF_183.auto_indent()
+			return
+		end
+
+		vim.ui.select({
+			"yes",
+			"no",
+		}, {
+			prompt = "reindent: ",
+		}, function(reindent)
+			local tab_len = vim.opt_local.tabstop._value
+			vim.ui.input({
+				prompt = "tab length: ",
+			}, function(tl)
+				if tl and isnum(tl) then
+					tab_len = tonumber(tl)
+				end
+
+				-- check parameters
+				reindent = (reindent == "yes")
+				if not indent_type then
+					return
+				end
+
+				-- change indents to tabs which are easier to work with for reindenting
+				if reindent then
+					vim.opt_local.expandtab = false
+
+					-- NOTE : retab command also replaces inline spaces, so we use a
+					--        substituion command instead
+					vim.cmd(
+						"silent! %s/\\(^\\s*\\)\\@<="
+							.. (" "):rep(vim.opt_local.tabstop._value)
+							.. "/	/g"
+					)
+				end
+
+				-- setting options
+				vim.opt_local.expandtab = (indent_type == "spaces")
+				vim.opt_local.tabstop = tab_len
+
+				-- change indents to spaces if the user selected the same
+				-- NOTE : at this point all indentation is already in tabs
+				if indent_type == "spaces" and reindent then
+					vim.cmd(
+						"silent! %s/\\(^\\s*\\)\\@<=	/"
+							.. (" "):rep(tab_len)
+							.. "/g"
+					)
+				end
+
+				vim.opt_local.listchars:remove("leadmultispace")
+				vim.opt_local.listchars:append({
+					leadmultispace = "▎" .. ("∙"):rep(tab_len - 1),
+				})
+			end)
+		end)
+	end)
+end, { desc = "[custom]: change indentation style without reindenting" })
+
+-- substitute standalone words or substrings
+cmd("SubstituteWord", function()
+	vim.ui.input({
+		prompt = "target: ",
+	}, function(target)
+		-- check if target is entered
+		if not target then
+			return
+		end
+
+		-- get substitute
+		vim.ui.input({
+			prompt = "substitute: ",
+		}, function(substitute)
+			substitute = substitute or ""
+
+			-- to replace substring occurences or not
+			vim.ui.select({
+				"yes",
+				"no",
+			}, {
+				prompt = "substitute substring occurences: ",
+			}, function(replace_substrings)
+				replace_substrings = (replace_substrings == "yes")
+
+				-- replace
+				vim.api.nvim_feedkeys(
+					vim.api.nvim_replace_termcodes(
+						":%s/"
+							.. (replace_substrings and "" or "\\<")
+							.. target
+							.. (replace_substrings and "/" or "\\>/")
+							.. substitute
+							.. "/gI",
+						true,
+						true,
+						true
+					),
+					"n",
+					false
+				)
+			end)
+		end)
+	end)
+end, { desc = "[custom]: substitute a string (even non-standalone)" })
