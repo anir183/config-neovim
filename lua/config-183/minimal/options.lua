@@ -7,7 +7,7 @@ end
 
 local opt = vim.opt_global
 
-vim.cmd.colorscheme("retrobox")
+vim.cmd.colorscheme("habamax")
 
 -- status column
 opt.number = true
