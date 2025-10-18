@@ -69,9 +69,7 @@ end
 local enabled = CONF_183.settings.module_toggles.plugin
 require("lazy").setup(CONF_183.settings.test_plugins or {
 	spec = {
-		enabled.dependencies and {
-			import = "config-183.plugin.lists.dependencies"
-		} or {},
+		{ import = "config-183.plugin.lists.dependencies" },
 		enabled.essentials and {
 			import = "config-183.plugin.lists.essentials"
 		} or {},

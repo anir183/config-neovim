@@ -165,10 +165,9 @@ return {
 			aesthetics = {
 				theme = true,
 			},
-			dependencies = true,
 			essentials = true,
 			quality_of_life = true,
 			dev_tools = true,
-		}
-	}
+		},
+	},
 }
