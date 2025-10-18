@@ -32,8 +32,8 @@ return {
 				vim.cmd.GuessIndent()
 				vim.opt_local.listchars:remove("leadmultispace")
 				vim.opt_local.listchars:append({
-					leadmultispace = "▎" ..
-					("∙"):rep(vim.opt_local.tabstop._value - 1),
+					leadmultispace = "▎"
+						.. ("∙"):rep(vim.opt_local.tabstop._value - 1),
 				})
 			end,
 			{ desc = "[plugin/guess-indent]: auto set indent" }
@@ -55,6 +55,6 @@ return {
 			"<leader>ai",
 			"<CMD>" .. CONF_183.settings.cmd_pre .. "AutoSetIndent<CR>",
 			desc = "[plugin/guess-indent]: [A]uto set [I]ndent",
-		}
-	}
+		},
+	},
 }

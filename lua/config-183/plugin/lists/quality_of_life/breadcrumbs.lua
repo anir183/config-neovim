@@ -16,9 +16,13 @@ return {
 		vim.api.nvim_create_autocmd("CursorMoved", {
 			group = CONF_183.augrp,
 			callback = function()
-				if navic.is_available() then
-					vim.opt.winbar = '%{%v:lua.require("nvim-navic")' ..
-										".get_location()%}"
+				-- get breadcrumbs location and trim it
+				local location = (navic.get_location() or ""):gsub("%s+", "")
+
+				-- hide winbar if no data availabel or data is empty
+				if navic.is_available() and location ~= "" then
+					vim.opt.winbar = "%{%v:lua.require(\"nvim-navic\")"
+						.. ".get_location()%}"
 				else
 					vim.opt.winbar = ""
 				end

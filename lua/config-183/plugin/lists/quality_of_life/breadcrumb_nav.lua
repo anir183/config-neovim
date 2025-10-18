@@ -1,10 +1,16 @@
 --[[ breadcrumb_nav.lua: navigate through breadcrumbs ]]
 
 return {
-	"SmiteshP/nvim-navbuddy",
+	"hasansujon786/nvim-navbuddy",
 	name = "navbuddy",
 	dependencies = { "lspconfig", "navic", "comment", "nui" },
 	opts = {
+		window = {
+			size = {
+				height = "70%",
+				width = "80%",
+			},
+		},
 		lsp = {
 			auto_attach = true,
 		},

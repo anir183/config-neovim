@@ -12,14 +12,18 @@ return {
 		{
 			mode = "n",
 			"<leader>ct",
-			function() vim.cmd.CloakToggle() end,
-			desc = "[plugin/cloak]: [C]loak hiding [T]oggle"
+			function()
+				vim.cmd.CloakToggle()
+			end,
+			desc = "[plugin/cloak]: [C]loak hiding [T]oggle",
 		},
 		{
 			mode = "n",
 			"<leader>CT",
-			function() vim.cmd.CloakPreviewLine() end,
-			desc = "[plugin/cloak]: [C]loak curren[T] line preview"
+			function()
+				vim.cmd.CloakPreviewLine()
+			end,
+			desc = "[plugin/cloak]: [C]loak curren[T] line preview",
 		},
 	},
 }

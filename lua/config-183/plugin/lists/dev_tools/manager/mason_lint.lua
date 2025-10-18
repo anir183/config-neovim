@@ -9,5 +9,5 @@ return {
 	},
 	opts = {
 		automatic_installation = true,
-	}
+	},
 }

@@ -9,7 +9,9 @@ return {
 		{
 			mode = "n",
 			"<leader>mn",
-			function() vim.cmd.Mason() end,
+			function()
+				vim.cmd.Mason()
+			end,
 			desc = "[plugin/mason]: open [M]aso[N] window",
 		},
 	},

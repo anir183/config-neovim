@@ -13,13 +13,14 @@ CONF_183 = {
 CONF_183.settings = vim.tbl_deep_extend(
 	"force",
 	require("config-183.settings.defaults"),
-	pcall(require, "config-183.settings.custom") and
-		require("config-183.settings.custom") or {}
+	pcall(require, "config-183.settings.custom")
+			and require("config-183.settings.custom")
+		or {}
 )
 
 -- auto command group
 CONF_183.augrp = vim.api.nvim_create_augroup(CONF_183.augrp_name, {
-	clear = true
+	clear = true,
 })
 
 -- verbose printing

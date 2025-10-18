@@ -67,8 +67,9 @@ CONF_183.statusline.component_functions = {
 
 -- get component function
 CONF_183.statusline.get_component = function(cmp_name)
-	return "%{%v:lua.CONF_183.statusline.component_functions." ..
-			cmp_name .. "()%}"
+	return "%{%v:lua.CONF_183.statusline.component_functions."
+		.. cmp_name
+		.. "()%}"
 end
 
 -- build statusline
@@ -90,4 +91,4 @@ CONF_183.statusline.arrangement = {
 	component("indent"),
 	component("position"),
 }
-vim.opt_global.statusline = table.concat(CONF_183.statusline.arrangement , "")
+vim.opt_global.statusline = table.concat(CONF_183.statusline.arrangement, "")

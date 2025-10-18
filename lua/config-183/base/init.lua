@@ -10,4 +10,3 @@ require("config-183.base.keymaps")
 require("config-183.base.autocmds")
 
 vim.filetype.add(CONF_183.settings.additional_filetypes)
-

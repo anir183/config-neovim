@@ -1,1 +1,1 @@
-require("config-183");
+require("config-183")

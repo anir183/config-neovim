@@ -27,5 +27,5 @@ return {
 
 			::continue::
 		end
-	end
+	end,
 }

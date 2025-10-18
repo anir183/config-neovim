@@ -25,22 +25,16 @@ return {
 		for name, handler in pairs(CONF_183.settings.daps) do
 			table.insert(ensure_installed, dap_name)
 
-			if handler then 
+			if handler then
 				handlers[dap_name] = handler
 			end
 		end
 
 		-- setup mason_dap
-		mason_dap.setup(
-			vim.tbl_deep_extend(
-				"force",
-				{
-					ensure_installed = ensure_installed,
-					handlers = handlers
-				},
-				opts
-			)
-		)
+		mason_dap.setup(vim.tbl_deep_extend("force", {
+			ensure_installed = ensure_installed,
+			handlers = handlers,
+		}, opts))
 
 		-- defer config of all daps to give mason-nvim-dap time to setup
 		vim.defer_fn(function()

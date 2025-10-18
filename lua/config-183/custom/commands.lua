@@ -26,16 +26,16 @@ cmd("EditOptions", function()
 		col = (ui.width - width) / 2,
 		row = (ui.height - height) / 2,
 		focusable = true,
-		border = "none",
+		border = "single",
 	})
 
-	local opts_path = vim.fn.stdpath("config") ..
-						"/lua/config-183/settings/custom.lua"
+	local opts_path = vim.fn.stdpath("config")
+		.. "/lua/config-183/settings/custom.lua"
 	local opts_file = io.open(opts_path, "r")
 
 	if opts_file == nil then
-		local def_opts_path = vim.fn.stdpath("config") ..
-						"/lua/config-183/settings/defaults.lua"
+		local def_opts_path = vim.fn.stdpath("config")
+			.. "/lua/config-183/settings/defaults.lua"
 		local def_opts_file = io.open(def_opts_path, "r")
 
 		if not def_opts_file then
@@ -55,7 +55,7 @@ cmd("EditOptions", function()
 
 	CONF_183.functions.nmap(
 		"q",
-		vim.cmd.wq, 
+		vim.cmd.wq,
 		"[custom]: close the config popup",
 		{ buffer = true }
 	)

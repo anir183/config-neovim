@@ -22,7 +22,9 @@ return {
 		{
 			mode = { "i", "s", "n" },
 			"<C-h>",
-			function() require("lsp_signature").toggle_float_win() end,
+			function()
+				require("lsp_signature").toggle_float_win()
+			end,
 			desc = "[plugin/lsp_signature]: toggle signature widow",
 		},
 	},

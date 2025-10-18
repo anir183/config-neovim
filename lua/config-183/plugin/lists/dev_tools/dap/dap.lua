@@ -5,6 +5,5 @@ return {
 	name = "dap",
 	dependencies = "mason",
 	lazy = false,
-	keys = {
-	},
+	keys = {},
 }

@@ -9,19 +9,25 @@ return {
 		{
 			mode = "n",
 			"<leader>cp",
-			function() vim.cmd.CccPick() end,
+			function()
+				vim.cmd.CccPick()
+			end,
 			desc = "[plugin/color-picker]: open [C]olor [P]icker",
 		},
 		{
 			mode = "n",
 			"<leader>ch",
-			function() vim.cmd.CccHighlighterToggle() end,
+			function()
+				vim.cmd.CccHighlighterToggle()
+			end,
 			desc = "[plugin/color-picker]: toggle [C]olor [H]ighlighting",
 		},
 		{
 			mode = "n",
 			"<leader>cc",
-			function() vim.cmd.CccConvert() end,
+			function()
+				vim.cmd.CccConvert()
+			end,
 			desc = "[plugin/color-picker]: [C]onvert [C]olor",
 		},
 	},

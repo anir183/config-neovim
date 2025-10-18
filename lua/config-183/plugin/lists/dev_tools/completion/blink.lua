@@ -44,7 +44,16 @@ return {
 
 		-- keypress emulation
 		local feedkeys = function(keys)
-			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(vim.keycode(keys), true, true, true), "ni", false)
+			vim.api.nvim_feedkeys(
+				vim.api.nvim_replace_termcodes(
+					vim.keycode(keys),
+					true,
+					true,
+					true
+				),
+				"ni",
+				false
+			)
 		end
 
 		-- hide or cancel completion menu

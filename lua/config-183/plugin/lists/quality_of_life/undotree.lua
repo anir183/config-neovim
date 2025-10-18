@@ -13,8 +13,10 @@ return {
 		{
 			mode = "n",
 			"<leader>u",
-			function() vim.cmd.UndotreeToggle() end,
-			desc = "[plugin/undotree]: toggle [U]ndo history tree"
+			function()
+				vim.cmd.UndotreeToggle()
+			end,
+			desc = "[plugin/undotree]: toggle [U]ndo history tree",
 		},
-	}
+	},
 }

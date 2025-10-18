@@ -15,22 +15,9 @@ nmap("<leader>ms", vim.cmd.messages, "[base]: open [M]essage[S] window")
 
 -- moving text
 -- WARNING : using "<cmd>" instead of ":" breaks these commands
-nmap(
-	"<C-j>",
-	"v:m '>+1<CR>gv=<ESC>",
-	"[base]: move the current line up"
-)
-nmap(
-	"<C-k>",
-	"v:m '<-2<CR>gv=<ESC>",
-	"[base]: move the current line down"
-)
-map(
-	"v",
-	"<C-j>",
-	":m '>+1<CR>gv=<ESC>gv",
-	"[base]: move current selection up"
-)
+nmap("<C-j>", "v:m '>+1<CR>gv=<ESC>", "[base]: move the current line up")
+nmap("<C-k>", "v:m '<-2<CR>gv=<ESC>", "[base]: move the current line down")
+map("v", "<C-j>", ":m '>+1<CR>gv=<ESC>gv", "[base]: move current selection up")
 map(
 	"v",
 	"<C-k>",
@@ -39,21 +26,9 @@ map(
 )
 
 -- stationary cursor
-nmap(
-	"J",
-	"mzJ`z",
-	"[base]: dont move the cursor when joining next line"
-)
-nmap(
-	"<C-d>",
-	"<C-d>zz",
-	"[base]: keep cursor centered when scrolling down"
-)
-nmap(
-	"<C-u>",
-	"<C-u>zz",
-	"[base]: keep cursor centered when scrolling up"
-)
+nmap("J", "mzJ`z", "[base]: dont move the cursor when joining next line")
+nmap("<C-d>", "<C-d>zz", "[base]: keep cursor centered when scrolling down")
+nmap("<C-u>", "<C-u>zz", "[base]: keep cursor centered when scrolling up")
 nmap(
 	"n",
 	"nzzzv",
@@ -67,45 +42,18 @@ nmap(
 
 -- modification or extensions of existing keymaps
 map({ "n", "v" }, "x", "\"_x", "[base]: remove without copying")
-map(
-	"x",
-	"<leader>p",
-	"\"_dP",
-	"[base]: paste over selection without copying"
-)
-map(
-	{ "n", "v" },
-	"<leader>y",
-	"\"+y",
-	"[base]: yank to system clipboard"
-)
-nmap(
-	"<leader>Y",
-	"\"+Y",
-	"[base]: yank till end of line to system clipboard"
-)
-map(
-	{ "n", "v" },
-	"<leader>d",
-	"\"_d",
-	"[base]: delete without copying"
-)
-nmap(
-	"<leader>D",
-	"\"_D",
-	"[base]: delete till end of line without copying"
-)
+map("x", "<leader>p", "\"_dP", "[base]: paste over selection without copying")
+map({ "n", "v" }, "<leader>y", "\"+y", "[base]: yank to system clipboard")
+nmap("<leader>Y", "\"+Y", "[base]: yank till end of line to system clipboard")
+map({ "n", "v" }, "<leader>d", "\"_d", "[base]: delete without copying")
+nmap("<leader>D", "\"_D", "[base]: delete till end of line without copying")
 map(
 	{ "n", "v" },
 	"<leader>c",
 	"\"_c",
 	"[base]: delete and edit without copying"
 )
-nmap(
-	"<leader>C",
-	"\"_C",
-	"[base]: delete till eol and edit without copying"
-)
+nmap("<leader>C", "\"_C", "[base]: delete till eol and edit without copying")
 
 -- split resizing
 nmap("-", function()
@@ -135,13 +83,9 @@ nmap("[l", vim.cmd.lprev, "[base]: walk backward in [L]ocation list")
 
 -- lsp keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = AUGRP,
+	group = CONF_183.augrp,
 	callback = function()
-		nmap(
-			"<leader>rn",
-			vim.lsp.buf.rename,
-			"[base/lsp]: [R]e[N]ame symbol"
-		)
+		nmap("<leader>rn", vim.lsp.buf.rename, "[base/lsp]: [R]e[N]ame symbol")
 		nmap(
 			"<leader>ic",
 			vim.lsp.buf.incoming_calls,
@@ -163,21 +107,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.buf.code_action,
 			"[base/lsp]: open [C]ode [A]ctions"
 		)
-		nmap(
-			"gD",
-			vim.lsp.buf.declaration,
-			"[base/lsp]: [G]oto [D]eclaration"
-		)
-		nmap(
-			"gd",
-			vim.lsp.buf.definition,
-			"[base/lsp]: [G]oto [D]efinition"
-		)
-		nmap(
-			"gr",
-			vim.lsp.buf.references,
-			"[base/lsp]: [G]et [R]eferences"
-		)
+		nmap("gD", vim.lsp.buf.declaration, "[base/lsp]: [G]oto [D]eclaration")
+		nmap("gd", vim.lsp.buf.definition, "[base/lsp]: [G]oto [D]efinition")
+		nmap("gr", vim.lsp.buf.references, "[base/lsp]: [G]et [R]eferences")
 		nmap(
 			"gi",
 			vim.lsp.buf.implementation,

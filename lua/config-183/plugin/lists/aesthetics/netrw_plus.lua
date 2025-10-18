@@ -5,6 +5,6 @@ return {
 	name = "netrw-plus",
 	dependencies = "devicons",
 	opts = {
-		use_devicons = true
-	}
+		use_devicons = true,
+	},
 }

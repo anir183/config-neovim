@@ -7,5 +7,5 @@ return {
 		"mason",
 		"conform",
 	},
-	opts = {}
+	opts = {},
 }

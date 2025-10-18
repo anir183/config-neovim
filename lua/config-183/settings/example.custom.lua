@@ -170,5 +170,5 @@ return {
 	-- toggling a module-group turns off all modules under it
 	-- module_toggles = { } -- keeps defaults
 	-- module_toggles = false -- turn off all modules
-	module_toggles = {}
+	module_toggles = {},
 }

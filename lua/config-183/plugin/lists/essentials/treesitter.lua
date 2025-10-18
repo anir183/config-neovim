@@ -33,5 +33,5 @@ return {
 		for name, body in pairs(CONF_183.settings.treesitter_parsers) do
 			configs[name] = body
 		end
-	end
+	end,
 }

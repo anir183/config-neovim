@@ -21,7 +21,12 @@ return {
 				local name = string.lower(variable.name)
 				local value = string.lower(variable.name)
 
-				if name:match("secret") or name:match("api") or value:match("secret") or value:match("api") then
+				if
+					name:match("secret")
+					or name:match("api")
+					or value:match("secret")
+					or value:match("api")
+				then
 					return " ******"
 				end
 

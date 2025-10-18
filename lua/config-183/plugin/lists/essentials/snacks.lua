@@ -68,7 +68,7 @@ return {
 						event.data.actions.dest_url
 					)
 				end
-			end
+			end,
 		})
 	end,
 	lazy = false,
@@ -77,32 +77,42 @@ return {
 		{
 			mode = "n",
 			"<leader>/",
-			function() Snacks.picker.lines() end,
-			desc = "[plugin/snacks]: search in buffer"
+			function()
+				Snacks.picker.lines()
+			end,
+			desc = "[plugin/snacks]: search in buffer",
 		},
 		{
 			mode = "n",
 			"<leader>?",
-			function() Snacks.picker.search_history() end,
-			desc = "[plugin/snacks]: search history"
+			function()
+				Snacks.picker.search_history()
+			end,
+			desc = "[plugin/snacks]: search history",
 		},
 		{
 			mode = { "n", "x" },
 			"<leader>*",
-			function() Snacks.picker.grep_word() end,
-			desc = "[plugin/snacks]: grep word under cursor"
+			function()
+				Snacks.picker.grep_word()
+			end,
+			desc = "[plugin/snacks]: grep word under cursor",
 		},
 		{
 			mode = "n",
 			"<leader>q:",
-			function() Snacks.picker.command_history() end,
-			desc = "[plugin/snacks]: command history"
+			function()
+				Snacks.picker.command_history()
+			end,
+			desc = "[plugin/snacks]: command history",
 		},
 		{
 			mode = "n",
 			"<leader>ff",
-			function() Snacks.picker.files() end,
-			desc = "[plugin/snacks]: [F]ind [F]iles"
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "[plugin/snacks]: [F]ind [F]iles",
 		},
 		{
 			mode = "n",
@@ -113,7 +123,7 @@ return {
 					ignored = true,
 				})
 			end,
-			desc = "[plugin/snacks]: [F]ind [F]iles hidden and ignored incl"
+			desc = "[plugin/snacks]: [F]ind [F]iles hidden and ignored incl",
 		},
 		{
 			mode = "n",
@@ -123,7 +133,7 @@ return {
 					ignored = true,
 				})
 			end,
-			desc = "[plugin/snacks]: [F]ind [F]iles ignored incl"
+			desc = "[plugin/snacks]: [F]ind [F]iles ignored incl",
 		},
 		{
 			mode = "n",
@@ -133,7 +143,7 @@ return {
 					hidden = true,
 				})
 			end,
-			desc = "[plugin/snacks]: [F]ind [F]iles hidden incl"
+			desc = "[plugin/snacks]: [F]ind [F]iles hidden incl",
 		},
 		{
 			mode = "n",
@@ -143,43 +153,55 @@ return {
 					cwd = vim.fn.stdpath("config"),
 				})
 			end,
-			desc = "[plugin/snacks]: [F]ind files in [C]onfig directory"
+			desc = "[plugin/snacks]: [F]ind files in [C]onfig directory",
 		},
 		{
 			mode = "n",
 			"<leader>fr",
-			function() Snacks.picker.recent() end,
-			desc = "[plugin/snacks]: [F]ind [R]ecently visited files"
+			function()
+				Snacks.picker.recent()
+			end,
+			desc = "[plugin/snacks]: [F]ind [R]ecently visited files",
 		},
 		{
 			mode = "n",
 			"<leader>fk",
-			function() Snacks.picker.keymaps() end,
-			desc = "[plugin/snacks]: [F]ind [K]eymaps"
+			function()
+				Snacks.picker.keymaps()
+			end,
+			desc = "[plugin/snacks]: [F]ind [K]eymaps",
 		},
 		{
 			mode = "n",
 			"<leader>gg",
-			function() Snacks.picker.grep() end,
-			desc = "[plugin/snacks]: [G]lobal [G]rep"
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "[plugin/snacks]: [G]lobal [G]rep",
 		},
 		{
 			mode = "n",
 			"<leader>fh",
-			function() Snacks.picker.help() end,
-			desc = "[plugin/snacks]: [F]ind in [H]elp pages"
+			function()
+				Snacks.picker.help()
+			end,
+			desc = "[plugin/snacks]: [F]ind in [H]elp pages",
 		},
 		{
 			mode = "n",
 			"<leader>fq",
-			function() Snacks.picker.qflist() end,
-			desc = "[plugin/snacks]: [F]ind in [Q]uick fix list"
+			function()
+				Snacks.picker.qflist()
+			end,
+			desc = "[plugin/snacks]: [F]ind in [Q]uick fix list",
 		},
 		{
 			mode = "n",
 			"<leader>fl",
-			function() Snacks.picker.loclist() end,
-			desc = "[plugin/snacks]: [F]ind in [L]ocation list"
+			function()
+				Snacks.picker.loclist()
+			end,
+			desc = "[plugin/snacks]: [F]ind in [L]ocation list",
 		},
 
 		-- choose snacks pickers
@@ -216,21 +238,25 @@ return {
 					["search-lazy"] = Snacks.picker.lazy,
 				})
 			end,
-			desc = "[plugin/snacks]: choose [S]nacks [P]icker"
+			desc = "[plugin/snacks]: choose [S]nacks [P]icker",
 		},
 
 		-- words keymaps
 		{
 			mode = "n",
 			"<leader>wo",
-			function() Snacks.words.enable() end,
-			desc = "[plugin/snacks]: enable [WO]rds"
+			function()
+				Snacks.words.enable()
+			end,
+			desc = "[plugin/snacks]: enable [WO]rds",
 		},
 		{
 			mode = "n",
 			"<leader>WO",
-			function() Snacks.words.disable() end,
-			desc = "[plugin/snacks]: disable [WO]rds"
+			function()
+				Snacks.words.disable()
+			end,
+			desc = "[plugin/snacks]: disable [WO]rds",
 		},
 		{
 			mode = "n",
@@ -241,47 +267,59 @@ return {
 				vim.cmd("nohlsearch")
 				Snacks.words.clear()
 			end,
-			desc = "[plugin/snacks]: clear words and also clear screen"
+			desc = "[plugin/snacks]: clear words and also clear screen",
 		},
 		{
 			mode = "n",
 			"]w",
-			function() Snacks.words.jump(vim.v,count1, true) end,
-			desc = "[plugin/snacks]: jump to next word reference"
+			function()
+				Snacks.words.jump(vim.v, count1, true)
+			end,
+			desc = "[plugin/snacks]: jump to next word reference",
 		},
 		{
 			mode = "n",
 			"[w",
-			function() Snacks.words.jump(-vim.v.count1, true) end,
-			desc = "[plugin/snacks]: jump to previous word references"
+			function()
+				Snacks.words.jump(-vim.v.count1, true)
+			end,
+			desc = "[plugin/snacks]: jump to previous word references",
 		},
 
 		-- terminal keymaps
 		{
 			mode = "n",
 			"<leader>tt",
-			function() Snacks.terminal.toggle() end,
-			desc = "[plugin/snacks]: [T]oggle [T]erminal window"
+			function()
+				Snacks.terminal.toggle()
+			end,
+			desc = "[plugin/snacks]: [T]oggle [T]erminal window",
 		},
 		{
 			mode = "n",
 			"<leader>to",
-			function() Snacks.terminal.open() end,
-			desc = "[plugin/snacks]: [O]pen a [T]erminal window"
+			function()
+				Snacks.terminal.open()
+			end,
+			desc = "[plugin/snacks]: [O]pen a [T]erminal window",
 		},
 
 		-- zen mode keymaps
 		{
 			mode = "n",
 			"<leader>zt",
-			function() Snacks.zen.zen() end,
-			desc = "[plugin/snacks]: [Z]en mode [T]oggle"
+			function()
+				Snacks.zen.zen()
+			end,
+			desc = "[plugin/snacks]: [Z]en mode [T]oggle",
 		},
 		{
 			mode = "n",
 			"<leader>zz",
-			function() Snacks.zen.zoom() end,
-			desc = "[plugin/snacks]: toggle [Z]en in [Z]oom mode"
+			function()
+				Snacks.zen.zoom()
+			end,
+			desc = "[plugin/snacks]: toggle [Z]en in [Z]oom mode",
 		},
 
 		-- snacks actions menu
@@ -306,7 +344,7 @@ return {
 					["zen-zoom"] = Snacks.zen.zoom,
 				})
 			end,
-			desc = "[plugin/snacks]: choose from [S]nacks [A]ctions"
+			desc = "[plugin/snacks]: choose from [S]nacks [A]ctions",
 		},
 	},
 }

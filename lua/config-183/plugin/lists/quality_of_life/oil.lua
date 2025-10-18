@@ -16,8 +16,10 @@ return {
 		{
 			mode = "n",
 			"<leader>E",
-			function() vim.cmd.Oil() end,
-			desc = "[plugin/oil]: open the oil file [E]xplorer"
-		}
-	}
+			function()
+				vim.cmd.Oil()
+			end,
+			desc = "[plugin/oil]: open the oil file [E]xplorer",
+		},
+	},
 }

@@ -13,12 +13,12 @@ return {
 		vim.api.nvim_create_autocmd({
 			"BufEnter",
 			"BufWritePre",
-			"InsertLeave"
+			"InsertLeave",
 		}, {
 			group = CONF_183.augrp,
 			callback = function()
 				lint.try_lint()
-			end
+			end,
 		})
 	end,
 	lazy = false,
@@ -26,8 +26,10 @@ return {
 		{
 			mode = "n",
 			"<leader>ln",
-			function() require("lint").try_lint() end,
-			desc = "[plugin/nvim-lint]: perform [L]i[N]ting on current file"
-		}
+			function()
+				require("lint").try_lint()
+			end,
+			desc = "[plugin/nvim-lint]: perform [L]i[N]ting on current file",
+		},
 	},
 }

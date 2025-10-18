@@ -30,7 +30,7 @@ if not (vim.uv or vim.loop).fs_stat(CONF_183.lazy.path) then
 		vim.api.nvim_echo({
 			{ "Failed to clone Lazy.nvim:\n", "ErrorMsg" },
 			{ gitcmd_output, "WarningMsg" },
-			{ "\nPress any key to exit..." }
+			{ "\nPress any key to exit..." },
 		}, true, {})
 		vim.fn.getchar()
 		os.exit(1)
@@ -56,7 +56,10 @@ CONF_183.functions.plugin_actions_menu = function(commands)
 		local func = commands[choice]
 		if not func then
 			vim.api.nvim_echo({
-				{ "Error: Command does not have a function to run", "ErrorMsg" }
+				{
+					"Error: Command does not have a function to run",
+					"ErrorMsg",
+				},
 			}, true, {})
 			return
 		end
@@ -71,7 +74,7 @@ require("lazy").setup(CONF_183.settings.test_plugins or {
 	spec = {
 		{ import = "config-183.plugin.lists.dependencies" },
 		enabled.essentials and {
-			import = "config-183.plugin.lists.essentials"
+			import = "config-183.plugin.lists.essentials",
 		} or {},
 		enabled.dev_tools and {
 			{ import = "config-183.plugin.lists.dev_tools.manager" },
@@ -81,13 +84,13 @@ require("lazy").setup(CONF_183.settings.test_plugins or {
 			{ import = "config-183.plugin.lists.dev_tools.formatting" },
 			{ import = "config-183.plugin.lists.dev_tools.linting" },
 		} or {},
-		enabled.aesthetics and { 
-			import = "config-183.plugin.lists.aesthetics"
+		enabled.aesthetics and {
+			import = "config-183.plugin.lists.aesthetics",
 		} or {},
 		enabled.quality_of_life and {
-			import = "config-183.plugin.lists.quality_of_life"
+			import = "config-183.plugin.lists.quality_of_life",
 		} or {},
-		CONF_183.settings.plugins or {}
+		CONF_183.settings.plugins or {},
 	},
 
 	-- lockfile
