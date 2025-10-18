@@ -26,7 +26,7 @@ cmd("EditOptions", function()
 		col = (ui.width - width) / 2,
 		row = (ui.height - height) / 2,
 		focusable = true,
-		border = "rounded",
+		border = "none",
 	})
 
 	local opts_path = vim.fn.stdpath("config") ..
@@ -63,7 +63,7 @@ end, { desc = "[custom]: edit configurations" })
 
 -- change indentation style
 cmd("ChangeIndent", function()
-	vim.ui.select(CONF_183.auto_indent and {
+	vim.ui.select(CONF_183.functions.auto_indent and {
 		"auto",
 		"tabs",
 		"spaces",
@@ -74,7 +74,7 @@ cmd("ChangeIndent", function()
 		prompt = "indentation type: ",
 	}, function(indent_type)
 		if indent_type == "auto" then
-			CONF_183.auto_indent()
+			CONF_183.functions.auto_indent()
 			return
 		end
 

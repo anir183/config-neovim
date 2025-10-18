@@ -3,8 +3,8 @@
 CONF_183 = {
 	augrp_name = "augroup-183", -- string name for auto command group
 	augrp = {}, -- actual autocommand group
-	auto_indent = false, -- auto indent function, false to disable auto indent
 	functions = {}, -- useful functions
+	lazy = {}, -- table for storing lazy plugin manager stuff
 	settings = {}, -- settings table
 	statusline = {}, -- statusline components and functions
 }
@@ -42,6 +42,11 @@ CONF_183.functions.nmap = function(lhs, rhs, desc, opts)
 	vim.keymap.set("n", lhs, rhs, opts)
 end
 
+-- run the before functions
+if CONF_183.settings.before then
+	CONF_183.settings.before()
+end
+
 -- check if modules are enabled
 if not CONF_183.settings.module_toggles then
 	return
@@ -62,4 +67,4 @@ end
 -- normal configuration
 require("config-183.base")
 require("config-183.custom")
--- require("config-183.plugin")
+require("config-183.plugin")

@@ -40,6 +40,12 @@ return {
 	-- false or nil to use normal plugins
 	test_plugins = false,
 
+	-- to be executed before initalizing configuration
+	-- WARN: and settings may be overriden by the configuration
+	before = function()
+		-- vim.opt.bla = bla;
+	end,
+
 	-- to be executed on the VimEnter event, after config is loaded
 	after = function()
 		-- vim.opt.bla = bla;

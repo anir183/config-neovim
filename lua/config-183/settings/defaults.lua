@@ -26,6 +26,13 @@ return {
 	-- false or nil to use normal plugins
 	test_plugins = false,
 
+	-- to be executed before initalizing configuration
+	-- NOTE: runs even if modules are disabled
+	-- WARN: and settings may be overriden by the configuration
+	before = function()
+		-- vim.opt.bla = bla;
+	end,
+
 	-- to be executed on the VimEnter event, after config is loaded
 	after = function()
 		-- vim.opt.bla = bla;
@@ -154,19 +161,14 @@ return {
 			options = true,
 		},
 		vscode = {},
-		plugins = {
-			aesthetics = true,
+		plugin = {
+			aesthetics = {
+				theme = true,
+			},
 			dependencies = true,
 			essentials = true,
 			quality_of_life = true,
-			dev_tools = {
-				completion = true,
-				dap = true,
-				formatter = true,
-				linting = true,
-				lsp = true,
-				manager = true,
-			},
+			dev_tools = true,
 		}
 	}
 }
