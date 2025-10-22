@@ -3,6 +3,7 @@
 return {
 	"numToStr/Comment.nvim",
 	name = "comment",
+	main = "Comment",
 	opts = {
 		mappings = {
 			basic = false,
@@ -57,13 +58,17 @@ return {
 		{
 			mode = "x",
 			"<C-c><C-c>",
-			"<PLUG>comment_toggle_linewise_visual",
+			-- NOTE: "<PLUG>(comment_toggle_linewise_visual)" did not work
+			--       https://github.com/numToStr/Comment.nvim/blob/e30b7f2008e52442154b66f7c519bfd2f1e32acb/plugin/Comment.lua#L134
+			"<ESC><CMD>lua require(\"Comment.api\").locked(\"toggle.linewise\")(vim.fn.visualmode())<CR>gv",
 			desc = "[plugin/comment]: comment current selection",
 		},
 		{
 			mode = "x",
 			"<C-x><C-x>",
-			"<PLUG>comment_toggle_blockwise_visual",
+			-- NOTE: "<PLUG>(comment_toggle_blockwise_visual)" did not work
+			--       https://github.com/numToStr/Comment.nvim/blob/e30b7f2008e52442154b66f7c519bfd2f1e32acb/plugin/Comment.lua#L140
+			"<ESC><CMD>lua require(\"Comment.api\").locked(\"toggle.blockwise\")(vim.fn.visualmode())<CR>gv",
 			desc = "[plugin/comment]: block-comment current selection",
 		},
 	},
