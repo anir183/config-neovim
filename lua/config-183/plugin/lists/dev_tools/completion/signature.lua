@@ -16,16 +16,25 @@ return {
 		handler_opts = {
 			border = "none",
 		},
+		select_signature_key = "<M-s>",
 	},
 	lazy = false,
 	keys = {
 		{
 			mode = { "i", "s", "n" },
-			"<C-h>",
+			"<C-s>",
 			function()
 				require("lsp_signature").toggle_float_win()
 			end,
 			desc = "[plugin/lsp_signature]: toggle signature widow",
+		},
+		{
+			mode = { "i", "s", "n" },
+			"<C-S-s>",
+			function()
+				vim.lsp.buf.signature_help({ max_height = 200 })
+			end,
+			desc = "[base]: toggle lsp signature window",
 		},
 	},
 }
