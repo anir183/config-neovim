@@ -5,7 +5,7 @@ if not CONF_183.settings.module_toggles.base.options then
 	return
 end
 
-local opt = vim.opt_global
+local opt = vim.opt
 
 -- color scheme
 vim.cmd.colorscheme("habamax")
