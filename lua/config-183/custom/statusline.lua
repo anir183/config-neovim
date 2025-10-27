@@ -13,29 +13,32 @@ hl(0, "StatusLineTerm", { bg = "none" })
 hl(0, "StatusLineTermNC", { bg = "none" })
 
 CONF_183.statusline.mode_strs = {
-	["n"] = " normal ",
-	["niI"] = " insert [normal] ",
-	["niR"] = " replace [normal] ",
-	["nt"] = " terminal [normal] ",
-	["i"] = " insert ",
-	["R"] = " replace ",
-	["v"] = " visual ",
-	["V"] = " visual [line] ",
-	[""] = " visual [block] ",
-	["c"] = " command ",
-	["!"] = " command [external] ",
-	["t"] = " terminal ",
+	["n"] = "  normal  ",
+	["niI"] = "  insert [normal]  ",
+	["niR"] = "  replace [normal]  ",
+	["nt"] = "  terminal [normal]  ",
+	["i"] = "  insert  ",
+	["R"] = "  replace  ",
+	["v"] = "  visual  ",
+	["V"] = "  visual [line]  ",
+	[""] = "  visual [block]  ",
+	["c"] = "  command  ",
+	["!"] = "  command [external]  ",
+	["t"] = "  terminal  ",
 }
 
 -- components used in the statusline
 local fmt_str = "%%#%s#%s%%*" -- format string
 CONF_183.statusline.component_functions = {
 	filename = function()
-		return fmt_str:format("Dictionary", " %t ")
+		local flname = vim.fn.expand("%:p:t")
+		flname = flname == "" and vim.fn.expand("%") or flname
+		flname = flname == "" and "unnamed" or flname
+		return fmt_str:format("DiffFile", "[" .. flname .. "]")
 	end,
 
 	position = function()
-		return fmt_str:format("CursorLine", " %l:$-c ~ %2p%% ")
+		return fmt_str:format("DiffIndexLine", "[%02l:%02c ~ %2p%%]")
 	end,
 
 	mode = function()
@@ -47,21 +50,22 @@ CONF_183.statusline.component_functions = {
 		local type = vim.opt_local.expandtab._value and "spaces" or "tabs"
 		local len = vim.opt_local.tabstop._value
 
-		return fmt_str:format(
-			"CursorLineNr",
-			("[" .. type .. " : " .. len .. "] ")
+		return fmt_str:format("Label", ("[" .. type .. " : " .. len .. "]"))
+	end,
+
+	diagnostics = function()
+		local warns = vim.diagnostic.count(0)[vim.diagnostic.severity.WARN]
+		local errors = vim.diagnostic.count(0)[vim.diagnostic.severity.ERROR]
+		errors = fmt_str:format(
+			"DiagnosticError",
+			-- NOTE: keep this before setting warns for correct formatting
+			errors and (warns and ":[" or " [") .. errors .. "]" or ""
 		)
-	end,
-
-	warnings = function()
-		local count = vim.diagnostic.count(0)[vim.diagnostic.severity.WARN]
-		return fmt_str:format("DiagnosticWarn", " " .. (count or ""))
-	end,
-
-	errors = function()
-		local count = vim.diagnostic.count(0)[vim.diagnostic.severity.ERROR]
-		count = count and " " .. count or " "
-		return fmt_str:format("DiagnosticError", count)
+		warns = fmt_str:format(
+			"DiagnosticWarn",
+			warns and " [" .. warns .. "]" or ""
+		)
+		return warns .. errors
 	end,
 }
 
@@ -77,8 +81,8 @@ local component = CONF_183.statusline.get_component
 CONF_183.statusline.arrangement = {
 	-- left
 	component("mode"),
-	component("warnings"),
-	component("errors"),
+	component("diagnostics"),
+	" ",
 	"%r",
 	"%w",
 	"%h",
@@ -88,7 +92,10 @@ CONF_183.statusline.arrangement = {
 
 	-- right
 	component("filename"),
+	" ",
 	component("indent"),
+	" ",
 	component("position"),
+	" ",
 }
 vim.opt_global.statusline = table.concat(CONF_183.statusline.arrangement, "")
