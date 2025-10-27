@@ -56,6 +56,15 @@ return {
 			)
 		end
 
+		-- show menu
+		map({ "i", "s" }, "<C-Space>", function()
+			if not blink.is_visible() then
+				blink.show()
+			else
+				feedkeys("<C-Space>")
+			end
+		end, "[plugin/blink]: show completion menu")
+
 		-- hide or cancel completion menu
 		map({ "i", "s" }, "<C-c>", function()
 			if blink.is_visible() then
