@@ -34,11 +34,11 @@ CONF_183.statusline.component_functions = {
 		local flname = vim.fn.expand("%:p:t")
 		flname = flname == "" and vim.fn.expand("%") or flname
 		flname = flname == "" and "unnamed" or flname
-		return fmt_str:format("DiffFile", "[" .. flname .. "]")
+		return fmt_str:format("Dictionary", "[" .. flname .. "]")
 	end,
 
 	position = function()
-		return fmt_str:format("DiffIndexLine", "[%02l:%02c ~ %2p%%]")
+		return fmt_str:format("Dictionary", "[%02l:%02c ~ %2p%%]")
 	end,
 
 	mode = function()
@@ -50,7 +50,10 @@ CONF_183.statusline.component_functions = {
 		local type = vim.opt_local.expandtab._value and "spaces" or "tabs"
 		local len = vim.opt_local.tabstop._value
 
-		return fmt_str:format("Label", ("[" .. type .. " : " .. len .. "]"))
+		return fmt_str:format(
+			"Dictionary",
+			("[" .. type .. " : " .. len .. "]")
+		)
 	end,
 
 	diagnostics = function()
@@ -96,6 +99,5 @@ CONF_183.statusline.arrangement = {
 	component("indent"),
 	" ",
 	component("position"),
-	" ",
 }
 vim.opt_global.statusline = table.concat(CONF_183.statusline.arrangement, "")
