@@ -60,12 +60,12 @@ CONF_183.statusline.component_functions = {
 		local warns = vim.diagnostic.count(0)[vim.diagnostic.severity.WARN]
 		local errors = vim.diagnostic.count(0)[vim.diagnostic.severity.ERROR]
 		errors = fmt_str:format(
-			"DiagnosticError",
+			"DiagnosticSignError",
 			-- NOTE: keep this before setting warns for correct formatting
 			errors and (warns and ":[" or " [") .. errors .. "]" or ""
 		)
 		warns = fmt_str:format(
-			"DiagnosticWarn",
+			"DiagnosticSignWarn",
 			warns and " [" .. warns .. "]" or ""
 		)
 		return warns .. errors
