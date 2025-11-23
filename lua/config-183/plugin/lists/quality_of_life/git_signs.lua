@@ -85,7 +85,7 @@ return {
 		},
 		{
 			mode = "n",
-			"]g",
+			"[g",
 			function()
 				if vim.wo.diff then
 					vim.cmd.normal({ "[g", bang = true })
