@@ -11,7 +11,7 @@ local nmap = CONF_183.functions.nmap
 vim.g.mapleader = " "
 vim.g.maplocalleader = "//"
 
-nmap("<leader>ms", vim.cmd.messages, "[base]: open [M]essage[S] window")
+nmap("<leader>ms", "<CMD>messages<CR>", "[base]: open [M]essage[S] window")
 
 -- moving text
 -- WARNING : using "<cmd>" instead of ":" breaks these commands
