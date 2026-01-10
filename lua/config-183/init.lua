@@ -7,3 +7,5 @@
 -- ]]
 
 require("config-183.utils.globals")
+
+require("config-183.plugins")

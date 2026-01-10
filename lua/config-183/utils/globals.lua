@@ -60,3 +60,39 @@ FUNCS_183.join_paths = function(...)
 	return table.concat({...}, VARS_183.paths.separator)
 end
 
+---@class LazyVars
+--- variables related to lazy.nvim package manager
+VARS_183.lazy = {}
+---@type string path where lazy.nvim is installed
+VARS_183.lazy.path = FUNCS_183.join_paths(
+	VARS_183.paths.data,
+	"lazy",
+	"lazy.nvim"
+)
+---@type string path where lazy.nvim packages lock file is stored
+VARS_183.lazy.lock_path = FUNCS_183.join_paths(
+	VARS_183.paths.data,
+	"lazy-lock.json"
+)
+---@type string repository where the lazy.nvim package is hosted
+VARS_183.lazy.repo = "https://github.com/folke/lazy.nvim.git"
+---@type string[] installation command to pull down the remote repo
+VARS_183.lazy.install_cmd = {
+	"git",
+	"clone",
+	"--filter=blob:none",
+	"--branch=stable",
+	VARS_183.lazy.repo,
+	VARS_183.lazy.path,
+}
+---@class LazyPriorities
+--- different priority levels to control plugin configuration order
+VARS_183.lazy.priorities = {}
+---@type integer
+VARS_183.lazy.priorities.highest = 200
+---@type integer
+VARS_183.lazy.priorities.high = 100
+---@type integer
+VARS_183.lazy.priorities.default = 50
+---@type integer
+VARS_183.lazy.priorities.low = 25
